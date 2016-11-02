@@ -7,7 +7,10 @@ RUN apt-get update && apt-get install -y \
     php5-fpm \
     php5-json \
     php5-intl \
-  && usermod -u 1000 www-data 
+    php5-xdebug \
+  && usermod -u 1000 www-data
+
+ADD conf/xdebug.ini ${PHP_INI_DIR}/conf.d/20-xdebug.ini
 
 ADD start.sh /start.sh
 

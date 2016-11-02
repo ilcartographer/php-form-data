@@ -1,3 +1,8 @@
+pdf_form:
+    resource: "@PDFFormBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
