@@ -1,6 +1,6 @@
 <?php
 
-namespace PDFFormBundle\Tests\Controller;
+namespace PdfFormBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

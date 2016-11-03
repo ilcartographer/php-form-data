@@ -6,10 +6,10 @@
  * Time: 7:30 PM
  */
 
-namespace PDFFormBundle\Tests\Model;
+namespace PdfFormBundle\Tests\Model;
 
 
-use PDFFormBundle\Model\DeveloperLineItem;
+use PdfFormBundle\Model\DeveloperLineItem;
 
 class DeveloperLineItemTest extends \PHPUnit_Framework_TestCase
 {

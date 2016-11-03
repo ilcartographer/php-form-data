@@ -1,9 +1,10 @@
 <?php
 
-namespace PDFFormBundle\Controller;
+namespace PdfFormBundle\Controller;
 
-use PDFFormBundle\Form\DeveloperInvoiceType;
-use PDFFormBundle\Model\DeveloperInvoice;
+use PdfFormBundle\Form\DeveloperInvoiceType;
+use PdfFormBundle\Model\DeveloperInvoice;
+use PdfFormBundle\Model\DeveloperLineItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,7 +26,23 @@ class DefaultController extends Controller
     public function sampleAction()
     {
         $invoice = new DeveloperInvoice();
+
+        $invoice->setInvoiceDate('01/01/2016');
         $invoice->setInvoiceId(123456);
+        $invoice->setCustomerId('123ABC');
+        $invoice->setBillingAddress("123 Billing Street\nPdfville, WA 12345");
+
+        $dummyDeveloper = new DeveloperLineItem();
+        $dummyDeveloper->setName('Developer');
+        $dummyDeveloper->setDescription('Did some work');
+        $dummyDeveloper->setHourlyPrice(40.567);
+        $dummyDeveloper->setHours(4);
+
+        $invoice->setTaxRate(.05);
+
+        $invoice->setDevelopers([$dummyDeveloper, $dummyDeveloper, $dummyDeveloper, $dummyDeveloper, $dummyDeveloper]);
+
+        $invoice->setComments("Some\ngood\ncomments");
 
         $saved = $this->get('invoice_pdf.service')->fillDevelopmentInvoice($invoice);
 

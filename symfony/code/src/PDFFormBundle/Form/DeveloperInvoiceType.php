@@ -5,7 +5,7 @@
  * Date: 11/1/16
  * Time: 8:30 PM
  */
-namespace PDFFormBundle\Form;
+namespace PdfFormBundle\Form;
 
 use Braincrafted\Bundle\BootstrapBundle\Form\Type\BootstrapCollectionType;
 

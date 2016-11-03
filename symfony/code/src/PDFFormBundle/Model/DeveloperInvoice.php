@@ -6,7 +6,7 @@
  * Time: 8:28 PM
  */
 
-namespace PDFFormBundle\Model;
+namespace PdfFormBundle\Model;
 
 
 class DeveloperInvoice
@@ -20,6 +20,7 @@ class DeveloperInvoice
     private $comments;
 
     /**
+     * TODO:  This is going to get moved to a service
      * @return float
      */
     public function getInvoiceTotal() {

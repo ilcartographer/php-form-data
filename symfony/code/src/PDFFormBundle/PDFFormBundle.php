@@ -1,6 +1,6 @@
 <?php
 
-namespace PDFFormBundle;
+namespace PdfFormBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

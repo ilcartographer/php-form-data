@@ -6,7 +6,7 @@
  * Time: 8:28 PM
  */
 
-namespace PDFFormBundle\Model;
+namespace PdfFormBundle\Model;
 
 
 class DeveloperLineItem
@@ -16,8 +16,9 @@ class DeveloperLineItem
     private $hourlyPrice = 0;
     private $hours = 0;
 
+    // TODO: Not sure if I want this here or not
     public function getDeveloperTotalPrice() {
-        return $this->hourlyPrice * $this->hours;
+        return round($this->hourlyPrice * $this->hours, 2);
     }
 
     /**

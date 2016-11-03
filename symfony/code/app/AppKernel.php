@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
 
             new AppBundle\AppBundle(),
-            new PDFFormBundle\PDFFormBundle(),
+            new PdfFormBundle\PDFFormBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

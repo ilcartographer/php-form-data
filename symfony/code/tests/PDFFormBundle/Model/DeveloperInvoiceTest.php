@@ -6,11 +6,11 @@
  * Time: 7:38 PM
  */
 
-namespace PDFFormBundle\Tests\Model;
+namespace PdfFormBundle\Tests\Model;
 
 
-use PDFFormBundle\Model\DeveloperInvoice;
-use PDFFormBundle\Model\DeveloperLineItem;
+use PdfFormBundle\Model\DeveloperInvoice;
+use PdfFormBundle\Model\DeveloperLineItem;
 
 class DeveloperInvoiceTest extends \PHPUnit_Framework_TestCase
 {
