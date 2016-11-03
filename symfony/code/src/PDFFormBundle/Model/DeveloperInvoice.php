@@ -15,14 +15,14 @@ class DeveloperInvoice
     private $invoiceId;
     private $customerId;
     private $billingAddress;
-    private $developers;
-    private $taxRate;
+    private $developers = [];
+    private $taxRate = 0;
     private $comments;
 
     /**
      * @return float
      */
-    public function calculateInvoiceTotal() {
+    public function getInvoiceTotal() {
         // Check that developers were actually entered
         if(empty($this->developers) || !is_array($this->developers)) {
             return 0.0;
@@ -35,7 +35,7 @@ class DeveloperInvoice
             if(!($developer instanceof DeveloperLineItem))
                 continue;
 
-            $total += $developer->getHourlyPrice() * $developer->getHours();
+            $total += $developer->getDeveloperTotalPrice();
         }
 
         return $total + ($total * $this->taxRate);

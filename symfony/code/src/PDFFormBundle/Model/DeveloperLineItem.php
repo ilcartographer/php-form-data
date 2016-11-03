@@ -11,10 +11,14 @@ namespace PDFFormBundle\Model;
 
 class DeveloperLineItem
 {
-    private $name;
-    private $description;
-    private $hourlyPrice;
-    private $hours;
+    private $name = '';
+    private $description = '';
+    private $hourlyPrice = 0;
+    private $hours = 0;
+
+    public function getDeveloperTotalPrice() {
+        return $this->hourlyPrice * $this->hours;
+    }
 
     /**
      * @return mixed

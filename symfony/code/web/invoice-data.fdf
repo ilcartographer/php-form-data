@@ -1,0 +1,148 @@
+%FDF-1.2
+%‚„œ”
+1 0 obj 
+<<
+/FDF 
+<<
+/Fields [
+<<
+/V (0)
+/T (total_price_5)
+>> 
+<<
+/V (0)
+/T (total_price_4)
+>> 
+<<
+/V ()
+/T (bill_to)
+>> 
+<<
+/V (0)
+/T (total_price_3)
+>> 
+<<
+/V ()
+/T (developer_1)
+>> 
+<<
+/V (0)
+/T (total_price_2)
+>> 
+<<
+/V ()
+/T (developer_2)
+>> 
+<<
+/V (500)
+/T (hours_5)
+>> 
+<<
+/V (0)
+/T (total_price_1)
+>> 
+<<
+/V ()
+/T (developer_3)
+>> 
+<<
+/V (500)
+/T (hours_4)
+>> 
+<<
+/V ()
+/T (developer_4)
+>> 
+<<
+/V (500)
+/T (hours_3)
+>> 
+<<
+/V ()
+/T (developer_5)
+>> 
+<<
+/V (500)
+/T (hours_2)
+>> 
+<<
+/V (500)
+/T (hours_1)
+>> 
+<<
+/V ()
+/T (customer_id)
+>> 
+<<
+/V ()
+/T (description_5)
+>> 
+<<
+/V ()
+/T (date)
+>> 
+<<
+/V ()
+/T (hourly_rate_5)
+>> 
+<<
+/V ()
+/T (description_4)
+>> 
+<<
+/V ()
+/T (description_3)
+>> 
+<<
+/V ()
+/T (hourly_rate_4)
+>> 
+<<
+/V ()
+/T (hourly_rate_3)
+>> 
+<<
+/V ()
+/T (description_2)
+>> 
+<<
+/V ()
+/T (hourly_rate_2)
+>> 
+<<
+/V ()
+/T (description_1)
+>> 
+<<
+/V ()
+/T (hourly_rate_1)
+>> 
+<<
+/V (500)
+/T (tax)
+>> 
+<<
+/V (500)
+/T (total)
+>> 
+<<
+/V ()
+/T (invoice_number)
+>> 
+<<
+/V (0)
+/T (subtotal)
+>> 
+<<
+/V ()
+/T (comments)
+>>]
+>>
+>>
+endobj 
+trailer
+
+<<
+/Root 1 0 R
+>>
+%%EOF

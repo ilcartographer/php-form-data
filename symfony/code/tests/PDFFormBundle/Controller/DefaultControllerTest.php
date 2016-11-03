@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testInvoice()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/invoice');
 
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        $this->assertContains('Invoice date', $client->getResponse()->getContent());
     }
 }

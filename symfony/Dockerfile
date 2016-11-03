@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
     php5-json \
     php5-intl
 
+RUN yes | apt-get install pdftk
+
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 

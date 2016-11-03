@@ -1,3 +1,4 @@
 symfony/code/.idea
 symfony/code/web/css
 symfony/code/web/js
+*.iml
