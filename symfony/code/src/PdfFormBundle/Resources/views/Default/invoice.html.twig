@@ -14,7 +14,7 @@
      * @returns {Number}
      */
     function checkHourlyPrice(parentDivElement) {
-        var hourlyPrice = parseFloat(parentDivElement.find("input[id$='_hourlyPrice']").val());
+        var hourlyPrice = parentDivElement.find("input[id$='_hourlyPrice']").val().replace(/[^\d.-]/g, '');
 
         if(isNaN(hourlyPrice)) {
             hourlyPrice = 0;
@@ -31,7 +31,7 @@
      * @returns {Number}
      */
     function checkHours(parentDivElement) {
-        var hours = parseFloat(parentDivElement.find("input[id$='_hours']").val());
+        var hours = parentDivElement.find("input[id$='_hours']").val().replace(/[^\d.-]/g, '');
 
         if(isNaN(hours)) {
             hours = 0;
@@ -55,6 +55,27 @@
         parentDivElement.find("input[id$='_total']").val(total.toFixed(2));
     }
 
+    /**
+     * When a total or the tax rate is updated, update the invoice total input value
+     */
+    function updateInvoiceTotal() {
+        var developerTotal = 0;
+
+        $.each($("input[id^='developer_invoice_developers'][id$='_total']"), function() {
+            developerTotal += parseFloat($(this).val());
+        });
+
+        var taxRate = parseFloat($("#developer_invoice_taxRate").val());
+
+        if(isNaN(taxRate)) {
+            taxRate = 0;
+        }
+
+        var invoiceTotal = developerTotal * (1 + (taxRate / 100));
+
+        $("#developer_invoice_total").val(invoiceTotal.toFixed(2));
+    }
+
     $(document).ready(function() {
         // Add a change handler for developers' hourly price inputs
         $(document).on("input", "input[id$='_hourlyPrice']", function(e) {
@@ -63,6 +84,7 @@
             var inputDiv = $(e.target).parent().parent().parent().parent();
 
             updateDeveloperTotals(inputDiv);
+            updateInvoiceTotal();
         });
 
         // Add a change handler for developers' hour inputs
@@ -73,6 +95,12 @@
             var inputDiv = $(e.target).parent().parent().parent().parent();
 
             updateDeveloperTotals(inputDiv);
+            updateInvoiceTotal();
+        });
+
+        // Add a change handler for the tax rate input
+        $(document).on("input", "#developer_invoice_taxRate", function() {
+            updateInvoiceTotal();
         });
     });
 </script>

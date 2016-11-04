@@ -11,39 +11,95 @@ namespace PdfFormBundle\Model;
 
 class DeveloperInvoice
 {
+    /**
+     * @var \DateTime
+     */
     private $invoiceDate;
-    private $invoiceId;
-    private $customerId;
-    private $billingAddress;
-    private $developers = [];
-    private $taxRate = 0;
-    private $comments;
 
     /**
-     * TODO:  This is going to get moved to a service
+     * @var int
+     */
+    private $invoiceId = 0;
+
+    /**
+     * @var string
+     */
+    private $customerId = '';
+
+    /**
+     * @var string
+     */
+    private $billingAddress = '';
+
+    /**
+     * @var array
+     */
+    private $developers = [];
+
+    /**
+     * @var int
+     */
+    private $taxRate = 0;
+
+    /**
+     * @var string
+     */
+    private $comments = '';
+
+    /**
+     * The constructor will configure the default invoice date to be the current date
+     */
+    public function __construct() {
+        // Default to the current date for new invoices
+        $this->invoiceDate = new \DateTime();
+    }
+
+    /**
+     * Calculate the total of all developers' work without taxes
      * @return float
      */
-    public function getInvoiceTotal() {
+    public function getInvoiceSubtotal() {
         // Check that developers were actually entered
-        if(empty($this->developers) || !is_array($this->developers)) {
+        if (empty($this->developers) || !is_array($this->developers)) {
             return 0.0;
         }
 
         $total = 0.0;
 
         // To get the invoice total, sum up the billed hours for each developer and add tax based on given tax rate
-        foreach($this->developers as $developer) {
-            if(!($developer instanceof DeveloperLineItem))
+        foreach ($this->developers as $developer) {
+            if (!($developer instanceof DeveloperLineItem))
                 continue;
 
             $total += $developer->getDeveloperTotalPrice();
         }
 
-        return $total + ($total * $this->taxRate);
+        return $total;
     }
 
     /**
-     * @return mixed
+     * Calculate the taxes for this invoice
+     * @return float
+     */
+    public function getInvoiceTax() {
+        if(!is_numeric($this->taxRate)) {
+            return 0.0;
+        }
+
+        return round($this->taxRate * $this->getInvoiceSubtotal(), 2);
+    }
+
+    /**
+     * Calculate this invoice's total
+     * @return float
+     */
+    public function getInvoiceTotal()
+    {
+        return round($this->getInvoiceSubtotal() + $this->getInvoiceTax(), 2);
+    }
+
+    /**
+     * @return \DateTime
      */
     public function getInvoiceDate()
     {
@@ -51,7 +107,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @param mixed $invoiceDate
+     * @param \DateTime $invoiceDate
      */
     public function setInvoiceDate($invoiceDate)
     {
@@ -59,7 +115,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getInvoiceId()
     {
@@ -67,7 +123,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @param mixed $invoiceId
+     * @param int $invoiceId
      */
     public function setInvoiceId($invoiceId)
     {
@@ -75,7 +131,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCustomerId()
     {
@@ -83,7 +139,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @param mixed $customerId
+     * @param string $customerId
      */
     public function setCustomerId($customerId)
     {
@@ -91,7 +147,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getBillingAddress()
     {
@@ -99,7 +155,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @param mixed $billingAddress
+     * @param string $billingAddress
      */
     public function setBillingAddress($billingAddress)
     {
@@ -107,7 +163,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getDevelopers()
     {
@@ -115,7 +171,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @param mixed $developers
+     * @param array $developers
      */
     public function setDevelopers($developers)
     {
@@ -123,7 +179,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getTaxRate()
     {
@@ -131,7 +187,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @param mixed $taxRate
+     * @param int $taxRate
      */
     public function setTaxRate($taxRate)
     {
@@ -139,7 +195,7 @@ class DeveloperInvoice
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getComments()
     {
@@ -147,13 +203,10 @@ class DeveloperInvoice
     }
 
     /**
-     * @param mixed $comments
+     * @param string $comments
      */
     public function setComments($comments)
     {
         $this->comments = $comments;
     }
-
-
-
 }

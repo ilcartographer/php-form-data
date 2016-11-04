@@ -14,6 +14,54 @@ use PdfFormBundle\Model\DeveloperLineItem;
 
 class DeveloperInvoiceTest extends \PHPUnit_Framework_TestCase
 {
+    public function testSubtotal() {
+        $invoice = new DeveloperInvoice();
+
+        $developer1 = new DeveloperLineItem();
+        $developer1->setHourlyPrice(3);
+        $developer1->setHours(2);
+
+        $developer2 = new DeveloperLineItem();
+        $developer2->setHourlyPrice(5);
+        $developer2->setHours(4);
+
+        $invoice->setDevelopers([$developer1, $developer2]);
+
+        $this->assertEquals(26, $invoice->getInvoiceSubtotal());
+    }
+
+    public function testSubtotalNoDevelopers() {
+        $invoice = new DeveloperInvoice();
+
+        $this->assertEquals(0, $invoice->getInvoiceSubtotal());
+    }
+
+    public function testInvoiceTax() {
+        $invoice = new DeveloperInvoice();
+
+        $developer1 = new DeveloperLineItem();
+        $developer1->setHourlyPrice(3);
+        $developer1->setHours(2);
+
+        $developer2 = new DeveloperLineItem();
+        $developer2->setHourlyPrice(5);
+        $developer2->setHours(4);
+
+        $invoice->setDevelopers([$developer1, $developer2]);
+
+        $invoice->setTaxRate(.01);
+
+        $this->assertEquals(.26, $invoice->getInvoiceTax());
+    }
+
+    public function testInvoiceTaxNoDevelopers() {
+        $invoice = new DeveloperInvoice();
+
+        $invoice->setTaxRate(.01);
+
+        $this->assertEquals(0, $invoice->getInvoiceTax());
+    }
+
     public function testInvoiceTotal() {
         $invoice = new DeveloperInvoice();
 

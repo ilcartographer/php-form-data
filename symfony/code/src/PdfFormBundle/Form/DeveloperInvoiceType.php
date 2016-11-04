@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -42,6 +43,7 @@ class DeveloperInvoiceType extends AbstractType
                     )
                 )
             ->add('taxRate', PercentType::class, ['scale' => 5])
+            ->add('total', MoneyType::class, ['currency' => 'USD', 'mapped' => false, 'disabled' => true])
             ->add('comments', TextareaType::class)
             ->add('submit', SubmitType::class);
     }

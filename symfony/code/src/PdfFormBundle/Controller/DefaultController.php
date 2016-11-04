@@ -7,46 +7,35 @@ use PdfFormBundle\Model\DeveloperInvoice;
 use PdfFormBundle\Model\DeveloperLineItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
+     * Displays an invoice form that can be submitted to fill in the invoice PDF template
      * @Route("/invoice")
      */
-    public function invoiceAction()
+    public function invoiceAction(Request $request)
     {
         $invoiceForm = $this->createForm(DeveloperInvoiceType::class, new DeveloperInvoice());
+
+        // If this was a post, validate the form
+        if ($request->isMethod('POST')) {
+            $invoiceForm->submit($request->request->get($invoiceForm->getName()));
+
+            if ($invoiceForm->isValid()) {
+                // Generate a unique name for the file being requested
+                $fileName = uniqid();
+
+                // Fill out the PDF with the validated form data
+                $this->get('invoice_pdf.service')->fillDevelopmentInvoice($invoiceForm->getData(), $fileName);
+                return new BinaryFileResponse($this->get('kernel')->getRootDir() . '/../web' . '/filled_forms/' . $fileName . '.pdf');
+            }
+        }
+
+        // Return the form; If post request, this will display errors
         return $this->render('PdfFormBundle:Default:invoice.html.twig', ['invoice' => $invoiceForm->createView()]);
-    }
-
-    /**
-     * @Route("/invoice/dummy")
-     */
-    public function sampleAction()
-    {
-        $invoice = new DeveloperInvoice();
-
-        $invoice->setInvoiceDate('01/01/2016');
-        $invoice->setInvoiceId(123456);
-        $invoice->setCustomerId('123ABC');
-        $invoice->setBillingAddress("123 Billing Street\nPdfville, WA 12345");
-
-        $dummyDeveloper = new DeveloperLineItem();
-        $dummyDeveloper->setName('Developer');
-        $dummyDeveloper->setDescription('Did some work');
-        $dummyDeveloper->setHourlyPrice(40.567);
-        $dummyDeveloper->setHours(4);
-
-        $invoice->setTaxRate(.05);
-
-        $invoice->setDevelopers([$dummyDeveloper, $dummyDeveloper, $dummyDeveloper, $dummyDeveloper, $dummyDeveloper]);
-
-        $invoice->setComments("Some\ngood\ncomments");
-
-        $saved = $this->get('invoice_pdf.service')->fillDevelopmentInvoice($invoice);
-
-        return new JsonResponse(['error' => $saved->getError()]);
-//        return $this->render('PDFFormBundle:Default:dummy.html.twig', ['saved' => $saved]);
     }
 }

@@ -11,18 +11,37 @@ namespace PdfFormBundle\Model;
 
 class DeveloperLineItem
 {
+    /**
+     * @var string
+     */
     private $name = '';
+
+    /**
+     * @var string
+     */
     private $description = '';
+
+    /**
+     * @var float
+     */
     private $hourlyPrice = 0;
+
+    /**
+     * @var float
+     */
     private $hours = 0;
 
-    // TODO: Not sure if I want this here or not
+    /**
+     * Return the total to charge for this developer's work
+     * @return float
+     */
     public function getDeveloperTotalPrice() {
         return round($this->hourlyPrice * $this->hours, 2);
     }
 
+
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -30,7 +49,7 @@ class DeveloperLineItem
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -38,7 +57,7 @@ class DeveloperLineItem
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDescription()
     {
@@ -46,7 +65,7 @@ class DeveloperLineItem
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      */
     public function setDescription($description)
     {
@@ -54,7 +73,7 @@ class DeveloperLineItem
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getHourlyPrice()
     {
@@ -62,7 +81,7 @@ class DeveloperLineItem
     }
 
     /**
-     * @param mixed $hourlyPrice
+     * @param float $hourlyPrice
      */
     public function setHourlyPrice($hourlyPrice)
     {
@@ -70,7 +89,7 @@ class DeveloperLineItem
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getHours()
     {
@@ -78,12 +97,10 @@ class DeveloperLineItem
     }
 
     /**
-     * @param mixed $hours
+     * @param float $hours
      */
     public function setHours($hours)
     {
         $this->hours = $hours;
     }
-
-
 }
