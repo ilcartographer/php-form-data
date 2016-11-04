@@ -23,13 +23,14 @@ class DeveloperLineItemType extends AbstractType
             ->add('name', TextType::class)
             ->add('description', TextType::class)
             ->add('hourlyPrice', MoneyType::class, ['currency' => 'USD'])
-            ->add('hours', NumberType::class, ['scale' => 2]);
+            ->add('hours', NumberType::class, ['scale' => 2])
+            ->add('total', MoneyType::class, ['currency' => 'USD', 'mapped' => false, 'disabled' => true]);  // Will be populated by jQuery
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'PDFFormBundle\Model\DeveloperLineItem',
+            'data_class' => 'PdfFormBundle\Model\DeveloperLineItem',
         ));
     }
 }

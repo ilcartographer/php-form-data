@@ -49,7 +49,7 @@ class DeveloperInvoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'PDFFormBundle\Model\DeveloperInvoice',
+            'data_class' => 'PdfFormBundle\Model\DeveloperInvoice',
         ));
     }
 }

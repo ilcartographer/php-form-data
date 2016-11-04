@@ -16,8 +16,8 @@ class DefaultController extends Controller
      */
     public function invoiceAction()
     {
-        $invoiceForm = $this->createForm(DeveloperInvoiceType::class, new DeveloperInvoice(), ['attr' => ['class' => 'form-horizontal']]);
-        return $this->render('PDFFormBundle:Default:invoice.html.twig', ['invoice' => $invoiceForm->createView()]);
+        $invoiceForm = $this->createForm(DeveloperInvoiceType::class, new DeveloperInvoice());
+        return $this->render('PdfFormBundle:Default:invoice.html.twig', ['invoice' => $invoiceForm->createView()]);
     }
 
     /**

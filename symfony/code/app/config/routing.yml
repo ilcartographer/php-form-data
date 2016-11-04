@@ -1,5 +1,5 @@
 pdf_form:
-    resource: "@PDFFormBundle/Controller/"
+    resource: "@PdfFormBundle/Controller/"
     type:     annotation
     prefix:   /
 

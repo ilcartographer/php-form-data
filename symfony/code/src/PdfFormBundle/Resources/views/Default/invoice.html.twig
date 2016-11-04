@@ -1,5 +1,79 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{{ form(invoice) }}
+    {{ form_start(invoice, { 'style': 'horizontal' }) }}
+    {{ form(invoice) }}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+    /**
+     * Checks the hourly price input value and cleans up bad input
+     * @param parentDivElement
+     * @returns {Number}
+     */
+    function checkHourlyPrice(parentDivElement) {
+        var hourlyPrice = parseFloat(parentDivElement.find("input[id$='_hourlyPrice']").val());
+
+        if(isNaN(hourlyPrice)) {
+            hourlyPrice = 0;
+        }
+
+        parentDivElement.find("input[id$='_hourlyPrice']").val(hourlyPrice);
+
+        return hourlyPrice;
+    }
+
+    /**
+     * Checks the number of hours and cleans up bad input
+     * @param parentDivElement
+     * @returns {Number}
+     */
+    function checkHours(parentDivElement) {
+        var hours = parseFloat(parentDivElement.find("input[id$='_hours']").val());
+
+        if(isNaN(hours)) {
+            hours = 0;
+        }
+
+        parentDivElement.find("input[id$='_hours']").val(hours);
+
+        return hours;
+    }
+
+    /**
+     * Set the developer's total to the hours * rate
+     * @param parentDivElement
+     */
+    function updateDeveloperTotals(parentDivElement) {
+        var hourlyPrice = checkHourlyPrice(parentDivElement);
+        var hours = checkHours(parentDivElement);
+
+        var total = hourlyPrice * hours;
+
+        parentDivElement.find("input[id$='_total']").val(total.toFixed(2));
+    }
+
+    $(document).ready(function() {
+        // Add a change handler for developers' hourly price inputs
+        $(document).on("input", "input[id$='_hourlyPrice']", function(e) {
+            // The way the Braincrafted Bootstrap Collection renders forms, we have to go up 4 levels to get the parent
+            // div
+            var inputDiv = $(e.target).parent().parent().parent().parent();
+
+            updateDeveloperTotals(inputDiv);
+        });
+
+        // Add a change handler for developers' hour inputs
+        $(document).on("input", "input[id$='_hours']", function(e) {
+            // The way the Braincrafted Bootstrap Collection renders forms, we have to go up 4 levels to get the parent
+            // div
+
+            var inputDiv = $(e.target).parent().parent().parent().parent();
+
+            updateDeveloperTotals(inputDiv);
+        });
+    });
+</script>
 {% endblock %}
