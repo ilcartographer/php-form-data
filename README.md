@@ -15,6 +15,8 @@ Generated PDFs are stored in the web/filled_forms directory and then returned as
 
 ## Notes
 * Projected was developed on Mac OSX Yosemite using Docker Toolbox
+* All of the *.sh files must have executable permissions prior to running ```docker-compose up```
+* The var/logs and var/cache folders may need to be set to 777 permissions prior to running ```docker-compose up```
 * There is currently nothing in place that would prevent repeated spam of POST requests with supposedly-valid data and possibly eating up storage space.
 * The PDF Service currently could be abstracted so that PDFs could be generated based on the page/model used
 * It was stated to ignore some fields, but all fields on the PDF were included
